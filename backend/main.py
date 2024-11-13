@@ -7,6 +7,7 @@ from typing import Optional, List
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from sqlalchemy import or_ 
 
 from . import models, schemas, auth
 from .database import engine, get_db
