@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/astro_advisor/static/css/main.0dd1de91.chunk.css",
+    "main.js": "/astro_advisor/static/js/main.84eac3b5.chunk.js",
+    "main.js.map": "/astro_advisor/static/js/main.84eac3b5.chunk.js.map",
+    "runtime~main.js": "/astro_advisor/static/js/runtime~main.800f8aea.js",
+    "runtime~main.js.map": "/astro_advisor/static/js/runtime~main.800f8aea.js.map",
+    "static/js/2.c8d55f8c.chunk.js": "/astro_advisor/static/js/2.c8d55f8c.chunk.js",
+    "static/js/2.c8d55f8c.chunk.js.map": "/astro_advisor/static/js/2.c8d55f8c.chunk.js.map",
+    "static/js/3.0e4cdb98.chunk.js": "/astro_advisor/static/js/3.0e4cdb98.chunk.js",
+    "static/js/3.0e4cdb98.chunk.js.map": "/astro_advisor/static/js/3.0e4cdb98.chunk.js.map",
+    "index.html": "/astro_advisor/index.html",
+    "precache-manifest.656f79da10aad94d0e998200f7651217.js": "/astro_advisor/precache-manifest.656f79da10aad94d0e998200f7651217.js",
+    "service-worker.js": "/astro_advisor/service-worker.js",
+    "static/css/main.0dd1de91.chunk.css.map": "/astro_advisor/static/css/main.0dd1de91.chunk.css.map"
+  }
+}
