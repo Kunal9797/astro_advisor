@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, Text, ForeignKey, ARRAY
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, Text, ForeignKey, ARRAY, JSON
 from sqlalchemy.sql import func
 from .database import Base
 from passlib.hash import bcrypt
@@ -44,7 +44,7 @@ class Philosophy(Base):
     name = Column(String)
     description = Column(Text)
     origin = Column(String)
-    key_principles = Column(ARRAY(String))
+    key_principles = Column(JSON)  # Changed from ARRAY to JSON
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 class Religion(Base):
@@ -53,8 +53,8 @@ class Religion(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     description = Column(Text)
-    sacred_texts = Column(ARRAY(String))
-    practices = Column(ARRAY(String))
+    sacred_texts = Column(JSON)  # Changed from ARRAY to JSON
+    practices = Column(JSON)      # Changed from ARRAY to JSON
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 class AstrologicalSystem(Base):
@@ -64,6 +64,6 @@ class AstrologicalSystem(Base):
     name = Column(String)
     origin = Column(String)
     description = Column(Text)
-    key_concepts = Column(ARRAY(String))
-    zodiac_signs = Column(ARRAY(String))
+    key_concepts = Column(JSON)   # Changed from ARRAY to JSON
+    zodiac_signs = Column(JSON)   # Changed from ARRAY to JSON
     created_at = Column(DateTime(timezone=True), server_default=func.now())
