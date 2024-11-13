@@ -56,3 +56,43 @@ class UserUpdate(BaseModel):
     birth_date: Optional[str] = None
     birth_time: Optional[str] = None
     location: Optional[str] = None
+
+class PhilosophyBase(BaseModel):
+    name: str
+    description: str
+    origin: str
+    key_principles: List[str]
+
+class Philosophy(PhilosophyBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
+class ReligionBase(BaseModel):
+    name: str
+    description: str
+    sacred_texts: List[str]
+    practices: List[str]
+
+class Religion(ReligionBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
+
+class AstrologicalSystemBase(BaseModel):
+    name: str
+    origin: str
+    description: str
+    key_concepts: List[str]
+    zodiac_signs: List[str]
+
+class AstrologicalSystem(AstrologicalSystemBase):
+    id: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True

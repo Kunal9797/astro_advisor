@@ -218,3 +218,77 @@ async def get_quick_advice(user_input: schemas.UserInput, db: Session = Depends(
     except Exception as e:
         print(f"Error occurred: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get("/philosophies/", response_model=List[schemas.Philosophy])
+def get_philosophies(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    philosophies = db.query(models.Philosophy).offset(skip).limit(limit).all()
+    return philosophies
+
+@app.get("/philosophies/{philosophy_id}", response_model=schemas.Philosophy)
+def get_philosophy(philosophy_id: int, db: Session = Depends(get_db)):
+    philosophy = db.query(models.Philosophy).filter(models.Philosophy.id == philosophy_id).first()
+    if philosophy is None:
+        raise HTTPException(status_code=404, detail="Philosophy not found")
+    return philosophy
+
+@app.get("/religions/", response_model=List[schemas.Religion])
+def get_religions(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    religions = db.query(models.Religion).offset(skip).limit(limit).all()
+    return religions
+
+@app.get("/religions/{religion_id}", response_model=schemas.Religion)
+def get_religion(religion_id: int, db: Session = Depends(get_db)):
+    religion = db.query(models.Religion).filter(models.Religion.id == religion_id).first()
+    if religion is None:
+        raise HTTPException(status_code=404, detail="Religion not found")
+    return religion
+
+@app.get("/astrological-systems/", response_model=List[schemas.AstrologicalSystem])
+def get_astrological_systems(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    systems = db.query(models.AstrologicalSystem).offset(skip).limit(limit).all()
+    return systems
+
+@app.get("/astrological-systems/{system_id}", response_model=schemas.AstrologicalSystem)
+def get_astrological_system(system_id: int, db: Session = Depends(get_db)):
+    system = db.query(models.AstrologicalSystem).filter(models.AstrologicalSystem.id == system_id).first()
+    if system is None:
+        raise HTTPException(status_code=404, detail="Astrological system not found")
+    return system
+
+# Add search endpoint
+@app.get("/search/")
+def search_all(query: str, db: Session = Depends(get_db)):
+    results = {
+        "philosophies": [],
+        "religions": [],
+        "astrological_systems": []
+    }
+    
+    # Search in philosophies
+    philosophies = db.query(models.Philosophy).filter(
+        or_(
+            models.Philosophy.name.ilike(f"%{query}%"),
+            models.Philosophy.description.ilike(f"%{query}%")
+        )
+    ).all()
+    results["philosophies"] = philosophies
+
+    # Search in religions
+    religions = db.query(models.Religion).filter(
+        or_(
+            models.Religion.name.ilike(f"%{query}%"),
+            models.Religion.description.ilike(f"%{query}%")
+        )
+    ).all()
+    results["religions"] = religions
+
+    # Search in astrological systems
+    systems = db.query(models.AstrologicalSystem).filter(
+        or_(
+            models.AstrologicalSystem.name.ilike(f"%{query}%"),
+            models.AstrologicalSystem.description.ilike(f"%{query}%")
+        )
+    ).all()
+    results["astrological_systems"] = systems
+
+    return results
